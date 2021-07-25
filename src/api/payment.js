@@ -4,7 +4,7 @@ class PaymentApi extends BaseApi {
   getList({
     payrecord,
   }) {
-    return this.post('/getdata', {
+    return this.post('/api/getdata', {
       payrecord,
     });
   }
@@ -12,7 +12,7 @@ class PaymentApi extends BaseApi {
   create({
     RentalId, Months, Amount, Remark,
   }) {
-    return this.post('/setalreadypay', {
+    return this.post('/api/setalreadypay', {
       RentalId,
       Months,
       Amount,

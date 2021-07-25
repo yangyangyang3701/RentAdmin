@@ -4,7 +4,7 @@ class UserApi extends BaseApi {
   login({
     username, pwd,
   }) {
-    return this.post('/login', {
+    return this.post('/api/login', {
       username, pwd,
     });
   }
@@ -12,7 +12,7 @@ class UserApi extends BaseApi {
   register({
     username, pwd, email,
   }) {
-    return this.post('/register', {
+    return this.post('/api/register', {
       username,
       pwd,
       email,
@@ -22,7 +22,7 @@ class UserApi extends BaseApi {
   resetPwd({
     username, email,
   }) {
-    return this.post('/resetpwd', {
+    return this.post('/api/resetpwd', {
       username,
       email,
     });
@@ -31,7 +31,7 @@ class UserApi extends BaseApi {
   setPwd({
     username, oldpwd, newpwd,
   }) {
-    return this.post('/setpwd', {
+    return this.post('/api/setpwd', {
       username,
       oldpwd,
       newpwd,
@@ -39,7 +39,7 @@ class UserApi extends BaseApi {
   }
 
   logout() {
-    return this.post('/logout');
+    return this.post('/api/logout');
   }
 }
 
