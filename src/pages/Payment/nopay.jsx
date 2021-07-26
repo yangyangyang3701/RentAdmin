@@ -71,6 +71,7 @@ const Payment = () => {
     {
       title: '下一次交租日期',
       dataIndex: 'NextPayRentalTime',
+      sorter: (dataA, dataB) => +new Date(dataA) - (+new Date(dataB)),
     },
     {
       title: '操作',
@@ -105,9 +106,9 @@ const Payment = () => {
                     required: true,
                     disabled: true,
                   },
-                  Months: {
-                    title: '月份',
-                    type: 'string',
+                  MonthNum: {
+                    title: '月数',
+                    type: 'number',
                     required: true,
                   },
                   Amount: {
@@ -118,7 +119,7 @@ const Payment = () => {
                   Remark: {
                     title: '备注',
                     type: 'string',
-                    required: true,
+                    required: false,
                   },
                 },
               }}
