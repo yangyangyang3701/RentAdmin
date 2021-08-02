@@ -6,6 +6,8 @@ const initialState = {
   appTitle: '租房管理系统',
   collapsed: false, // 是否收起菜单
   userInfo: localUserInfo || null,
+  isMobile: /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent),
+  showMobileMenu: false,
 };
 
 export const globalStore = createSlice({
@@ -21,11 +23,15 @@ export const globalStore = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = { ...action.payload };
     },
+    toggleShowMobileMenu: (state) => {
+      state.showMobileMenu = !state.showMobileMenu;
+    },
   },
 });
 
 export const {
   toggleCollapsed, changeAppTitle, setUserInfo,
+  toggleShowMobileMenu,
 } = globalStore.actions;
 
 export default globalStore.reducer;

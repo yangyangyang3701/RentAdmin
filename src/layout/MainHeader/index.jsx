@@ -5,11 +5,12 @@ import {
 import FormRender, { useForm } from 'form-render';
 import {
   LockOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleCollapsed } from '../../store/global';
+import { toggleCollapsed, toggleShowMobileMenu } from '../../store/global';
 import userApi from '../../api/user';
 
 import './style.less';
@@ -64,9 +65,17 @@ const MainHeader = () => {
     <Layout.Header className="main-header">
       <Row type="flex" style={{ paddingRight: 20 }}>
         <Col style={{ flex: 1 }}>
-          <span className="trigger" onClick={() => dispatch(toggleCollapsed())}>
-            {globalStore.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </span>
+          {
+            globalStore.isMobile ? (
+              <span className="trigger" onClick={() => dispatch(toggleShowMobileMenu())}>
+                <MenuOutlined />
+              </span>
+            ) : (
+              <span className="trigger" onClick={() => dispatch(toggleCollapsed())}>
+                {globalStore.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              </span>
+            )
+          }
         </Col>
         <Col>
           <Dropdown overlay={menu} trigger={['click', 'hover']} placement="bottomCenter">

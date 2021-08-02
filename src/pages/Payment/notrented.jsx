@@ -6,14 +6,15 @@ import paymentApi from '../../api/payment';
 
 import './style.less';
 
-const Payment = () => {
+const NoRented = () => {
   const globalStore = useSelector((store) => store.global);
   const [isLoading, setIsLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
 
   const getList = async () => {
+    setIsLoading(true);
     const [err, res] = await paymentApi.getList({
-      payrecord: 1,
+      payrecord: 3,
     });
     setIsLoading(false);
     if (!err && res) {
@@ -32,6 +33,10 @@ const Payment = () => {
       dataIndex: 'Id',
     },
     {
+      title: 'RentalId',
+      dataIndex: 'RentalId',
+    },
+    {
       title: '房间',
       dataIndex: 'Name',
     },
@@ -40,20 +45,21 @@ const Payment = () => {
       dataIndex: 'TanentName',
     },
     {
-      title: '最近交租日期',
+      title: '租期开始时间',
       dataIndex: 'LatestRentalStartTime',
     },
     {
       title: '下一次交租日期',
       dataIndex: 'NextPayRentalTime',
+      sorter: (dataA, dataB) => +new Date(dataA) - (+new Date(dataB)),
     },
   ];
 
   return (
-    <div>
+    <div className="payment">
       <PageHeader
         className="page_header"
-        title="已支付"
+        title="未出租"
       />
       <Table
         dataSource={tableData}
@@ -69,4 +75,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default NoRented;

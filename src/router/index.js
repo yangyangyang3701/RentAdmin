@@ -55,6 +55,18 @@ const config = [
                 isMenu: true,
                 component: lazy(() => import('../pages/Payment/nopay')),
               },
+              {
+                path: '/payment/expire',
+                name: '即将到期',
+                isMenu: true,
+                component: lazy(() => import('../pages/Payment/expire')),
+              },
+              {
+                path: '/payment/norented',
+                name: '未出租',
+                isMenu: true,
+                component: lazy(() => import('../pages/Payment/notrented')),
+              },
             ],
           },
           {

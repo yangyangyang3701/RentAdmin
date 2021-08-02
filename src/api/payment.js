@@ -10,11 +10,11 @@ class PaymentApi extends BaseApi {
   }
 
   create({
-    RentalId, Months, Amount, Remark,
+    RentalId, MonthNum, Amount, Remark,
   }) {
     return this.post('/api/setalreadypay', {
       RentalId,
-      Months,
+      MonthNum,
       Amount,
       Remark,
     });

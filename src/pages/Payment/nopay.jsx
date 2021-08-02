@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Table, Button, Modal, message,
+  Table, Button, Modal, message, PageHeader,
 } from 'antd';
 import FormRender, { useForm } from 'form-render';
+
+import { useSelector } from 'react-redux';
 
 import paymentApi from '../../api/payment';
 
 import './style.less';
 
 const Payment = () => {
+  const globalStore = useSelector((store) => store.global);
+
   const [isLoading, setIsLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -65,7 +69,7 @@ const Payment = () => {
       dataIndex: 'TanentName',
     },
     {
-      title: '最近交租日期',
+      title: '租期开始时间',
       dataIndex: 'LatestRentalStartTime',
     },
     {
@@ -76,17 +80,28 @@ const Payment = () => {
     {
       title: '操作',
       dataIndex: '',
+      width: 80,
       render: (row) => <Button onClick={() => handleAddRecord(row)} type="link">收租</Button>,
+      fixed: globalStore.isMobile ? 'right' : '',
     },
   ];
 
   return (
     <div className="payment">
+      <PageHeader
+        className="page_header"
+        title="未支付"
+      />
       <Table
+        className="table"
         dataSource={tableData}
         loading={isLoading}
         columns={columns}
         rowKey="Id"
+        size={globalStore.isMobile ? 'small' : 'middle'}
+        scroll={{
+          x: globalStore.isMobile ? 800 : '',
+        }}
       />
       <Modal
         visible={showModal}
