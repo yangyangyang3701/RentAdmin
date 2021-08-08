@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Table, PageHeader, Button, Popconfirm,
+  Table, PageHeader, Button, Popconfirm, message,
 } from 'antd';
 
 import { useSelector } from 'react-redux';
@@ -25,8 +25,14 @@ const Expire = () => {
     }
   };
 
-  const handleEnd = (row) => () => {
-    console.log(row);
+  const handleEnd = (row) => async () => {
+    const [err, res] = await paymentApi.end({
+      RentalId: row.RentalId,
+    });
+    if (!err && res) {
+      message.success('操作成功');
+      getList();
+    }
   };
 
   useEffect(() => {
@@ -64,7 +70,7 @@ const Expire = () => {
       dataIndex: '',
       width: 100,
       render: (row) => (
-        <Popconfirm onConfirm={handleEnd(row)} okText="确定" cancelText="取消">
+        <Popconfirm title="确定结束租期吗？" onConfirm={handleEnd(row)} okText="确定" cancelText="取消">
           <Button type="link">结束租期</Button>
         </Popconfirm>
       ),
