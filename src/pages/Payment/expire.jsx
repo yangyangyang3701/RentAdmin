@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Table, PageHeader } from 'antd';
+import {
+  Table, PageHeader, Button, Popconfirm,
+} from 'antd';
 
 import { useSelector } from 'react-redux';
 import paymentApi from '../../api/payment';
@@ -21,6 +23,10 @@ const Expire = () => {
       console.log(res);
       setTableData(res.apartmentDetail || []);
     }
+  };
+
+  const handleEnd = (row) => () => {
+    console.log(row);
   };
 
   useEffect(() => {
@@ -52,6 +58,17 @@ const Expire = () => {
       title: '下一次交租日期',
       dataIndex: 'NextPayRentalTime',
       sorter: (dataA, dataB) => +new Date(dataA) - (+new Date(dataB)),
+    },
+    {
+      title: '操作',
+      dataIndex: '',
+      width: 100,
+      render: (row) => (
+        <Popconfirm onConfirm={handleEnd(row)} okText="确定" cancelText="取消">
+          <Button type="link">结束租期</Button>
+        </Popconfirm>
+      ),
+      fixed: globalStore.isMobile ? 'right' : '',
     },
   ];
 

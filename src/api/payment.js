@@ -19,6 +19,30 @@ class PaymentApi extends BaseApi {
       Remark,
     });
   }
+
+  end({
+    RentalId,
+  }) {
+    return this.post('/api/setend', {
+      RentalId,
+    });
+  }
+
+  start({
+    ApartmentId, StartDate, TenantName, TenantPhone, TenantIdCard,
+    PayPeriod, PeriodNum, PeriodFee,
+  }) {
+    return this.post('/api/setstart', {
+      ApartmentId,
+      StartDate,
+      TenantName,
+      TenantPhone,
+      TenantIdCard,
+      PayPeriod,
+      PeriodNum,
+      PeriodFee,
+    });
+  }
 }
 
 export default new PaymentApi();

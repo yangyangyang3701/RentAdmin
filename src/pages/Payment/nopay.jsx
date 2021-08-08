@@ -104,6 +104,7 @@ const Payment = () => {
         }}
       />
       <Modal
+        title="收租信息登记"
         visible={showModal}
         onCancel={() => setShowModal(false)}
         onOk={() => form?.submit()}
