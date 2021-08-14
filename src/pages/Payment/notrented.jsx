@@ -161,12 +161,12 @@ const NoRented = () => {
                     enumNames: ['按年', '按季', '按月'],
                   },
                   PeriodNum: {
-                    title: '首付月数',
+                    title: '租期月数',
                     type: 'number',
                     required: true,
                   },
                   PeriodFee: {
-                    title: '首付金额(元)',
+                    title: '每月/季/年费用(元)',
                     type: 'number',
                     required: true,
                   },
